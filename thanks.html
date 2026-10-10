@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Thank you | 3D Print Calculator</title>
+<meta name="theme-color" content="#0a1124">
+<script>try{var t=localStorage.getItem("theme");if(t!=="light"&&t!=="dark")t=matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";document.documentElement.setAttribute("data-theme",t)}catch(e){document.documentElement.setAttribute("data-theme","dark")}</script>
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preload" href="fonts/poppins-bold.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<header class="top scrolled"><div class="wrap bar">
+  <a class="logo" href="index.html"><img src="logo.png" width="38" height="38" alt="">3D Print Calculator</a>
+  <nav><button class="lang" id="lang" type="button" aria-label="Language" style="background:none;color:inherit;cursor:pointer">عربي</button></nav>
+</div></header>
+<main class="wrap center">
+  <h1 data-t="h">Payment received ✅</h1>
+  <p data-t="p">Thank you for your purchase. Download 3D Print Calculator and install it. Open the program, copy your Device ID and send it to us to receive your Activation Code.</p>
+  <a class="btn" href="https://github.com/Pr0fes0rx/3d-print-calculator/releases/latest" data-t="dl">Download 3D Print Calculator</a>
+  <p style="margin-top:28px"><span data-t="c">Send your Device ID to:</span> <a href="mailto:ahmwho@gmail.com">ahmwho@gmail.com</a></p>
+  <p style="font-size:.9rem" data-t="x">Paid with crypto? Attach a screenshot of the payment to the same email.</p>
+</main>
+<script>
+var T={en:{},ar:{
+h:"تم استلام الدفع ✅",
+p:"شكرًا لشرائك. حمّل 3D Print Calculator وثبّته. افتح البرنامج، انسخ Device ID وأرسله لنا لتستلم رمز التفعيل.",
+dl:"تحميل 3D Print Calculator",
+c:"أرسل Device ID إلى:",
+x:"دفعت بالكريبتو؟ أرفق لقطة شاشة الدفع في نفس الرسالة."
+}};
+var els=[].slice.call(document.querySelectorAll("[data-t]"));
+els.forEach(function(e){T.en[e.dataset.t]=e.textContent});
+function setLang(l){
+  document.documentElement.lang=l;document.documentElement.dir=l==="ar"?"rtl":"ltr";
+  els.forEach(function(e){e.textContent=T[l][e.dataset.t]});
+  document.getElementById("lang").textContent=l==="ar"?"English":"عربي";
+  try{localStorage.setItem("lang",l)}catch(x){}
+}
+var cur="en";
+try{cur=localStorage.getItem("lang")||((navigator.language||"").indexOf("ar")===0?"ar":"en")}catch(x){}
+if(cur==="ar")setLang("ar");
+document.getElementById("lang").onclick=function(){cur=cur==="ar"?"en":"ar";setLang(cur)};
+(function(){
+  if(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+  var box=document.createElement("div");box.className="confetti";box.setAttribute("aria-hidden","true");
+  var cols=["#5b87ff","#35d6c3","#a78bfa","#f4b942","#46d6a0","#f472b6"];
+  for(var i=0;i<40;i++){
+    var c=document.createElement("i");
+    c.style.left=Math.random()*100+"%";
+    c.style.background=cols[i%cols.length];
+    c.style.animationDuration=(2.6+Math.random()*2.4)+"s";
+    c.style.animationDelay=(Math.random()*1.2)+"s";
+    box.appendChild(c);
+  }
+  document.body.appendChild(box);
+  setTimeout(function(){box.remove()},7000);
+})();
+</script>
+</body>
+</html>

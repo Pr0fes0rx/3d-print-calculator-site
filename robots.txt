@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /thanks.html
+
+Sitemap: https://pr0fes0rx.github.io/3d-print-calculator-site/sitemap.xml
