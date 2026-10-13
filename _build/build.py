@@ -6,8 +6,12 @@ SRC = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(SRC) if os.path.basename(SRC) == "_build" else SRC
 SITE = "https://pr0fes0rx.github.io/3d-print-calculator-site"
 DL = "https://github.com/Pr0fes0rx/3d-print-calculator/releases/latest"
-PAYPAL = "https://www.paypal.com/ncp/payment/NK9VRK3VGKW9U"
+PAYPAL_REG = "https://www.paypal.com/ncp/payment/NK9VRK3VGKW9U"   # regular price $39.99
+PAYPAL = "https://www.paypal.com/ncp/payment/GMKFUCEG2VFYJ"       # Halloween price $19.99
+PROMO_END = "2026-10-31T23:59:59+03:00"   # sale + Halloween theme end (Syria time). After this date the page switches back by itself.
 TRUST = "https://link.trustwallet.com/send?asset=c195_tTR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t&amp;address=TFe3n6CLqt4D2rHTPWeDfpFdnEMXyJRfoz&amp;amount=39.99"
+TRUST_REG = TRUST
+TRUST = TRUST.replace("amount=39.99", "amount=19.99")
 ADDR = "TFe3n6CLqt4D2rHTPWeDfpFdnEMXyJRfoz"
 MAIL = "ahmwho@gmail.com"
 WEB3 = "2daa2a69-d0e0-4723-9e68-b8472fbb72f6"
@@ -106,27 +110,27 @@ T = {
 "en": dict(
  lang="en", dir="ltr", home="/", alt="ar", altlabel="عربي", altlink="ar/index.html", locale="en_US",
  title="3D Print Calculator | Real cost, profit and price for every 3D print",
- desc="Windows app that works out the real cost, net profit and selling price of every 3D print, including material, electricity, maintenance and failure risk. Analyzes G-code, 3MF and STL files. Creates PDF invoices. Free download.",
+ desc="Windows app that works out the real cost, net profit and selling price of every 3D print, including material, electricity, maintenance and failure risk. Analyzes G-code, 3MF and STL files. Free forever, with an optional Pro license for PDF invoices, multi-material pricing and business costs.",
  ogt="3D Print Calculator | Know what every print really costs",
- ogd="Real cost, profit and selling price for every 3D print, plus PDF invoices. Free download for Windows, unlocked with an Activation Code.",
+ ogd="Real cost, profit and selling price for every 3D print. Free forever for Windows. Pro unlocks PDF invoices, multi-material pricing and business costs.",
  skip="Skip to content", logoalt="3D Print Calculator logo",
  themeLbl="Dark / light mode", nTry="Try it", nApp="Inside the app", nFeat="Features", nGet="Pricing", nFaq="FAQ", nDl="Download",
  h1a="Know what every print", h1b="really costs.",
  sub="Enter the material, weight and print time. 3D Print Calculator adds electricity, maintenance and failure risk, then shows your real cost, your profit and the price to charge.",
- dl="Download Latest Version", buy="Buy Full License — $39.99",
- meta="Windows · Free download, unlocked with an Activation Code",
+ dl="Download Latest Version", buy="Buy Pro License — $39.99",
+ meta="Windows · Free forever, Pro is optional",
  labT="Try it with your numbers", reset="Reset", sMat="Material", sW="Model weight", sH="Print time", sM="Profit margin",
  more="More settings", fPr="Material price ($/kg)", fPw="Printer power", fKw="Electricity ($/kWh)", fMt="Maintenance ($/hour)", fFl="Failure risk (%)",
  cProfit="Profit +40%", tFil="Filament cost", tCost="Total real cost", tProfit="Estimated net profit", tPrice="Suggested selling price",
  bMat="Material", bEle="Electricity", bMnt="Maintenance", bFail="Failure protection",
  printed="Printed so far", sceneAlt="Animation of a vase being 3D printed layer by layer while the cost so far counts up",
- note="Trial: filament cost only. Electricity, maintenance, failure risk, profit and invoices are in the full version.",
+ note="Quick demo: filament cost only. The free app also adds electricity, maintenance, failure risk and profit. Pro adds PDF invoices and business costs.",
  unitH="h",
  aH="Your whole order in one window",
  aP="Fill in the job on one side, and read the cost, profit and selling price at the top.",
  x0="Full window", x0d="Everything for one order on a single screen.",
  x1="Print parameters", x1d="Material, weight, time, failure risk, electricity and margin.",
- x2="Multi-color", x2d="Price each color or material separately.",
+ x2="Multi-color (Pro)", x2d="Price each color or material separately.",
  x3="File analysis", x3d="Drop G-code, 3MF or STL. Analyzed offline.",
  x4="Folder watch", x4d="Reads new print files from a folder automatically.",
  x5="Cost, profit and price", x5d="Real cost, net profit and suggested selling price.",
@@ -135,9 +139,9 @@ T = {
  cxExL="Example: a $10 sale", cxNote="Pick a country. Currency, electricity price and exchange rate change with it. Sample values for illustration.", xOpen="Open full size", xAlt="3D Print Calculator app, English interface: print order parameters, cost, profit and selling price tiles and cost breakdown",
  fH="What you get",
  f1h="Cost and profit", f1p="Material, electricity, maintenance and failure risk in one result. Drop a G-code, 3MF or STL file and weight and time are read for you.",
- f2h="PDF invoices", f2p="Create invoices in Arabic, English, French or German, with preview and automatic numbering (INV-000001).",
- f3h="Countries and currencies", f3p="Supports many Arab and international countries, with their currencies, electricity prices and exchange rates.",
- f4h="Customer and invoice details", f4p="Customer and delivery info, line items, discount, shipping, tax and notes, with multi-page tables.",
+ f2h="PDF invoices (Pro)", f2p="Create invoices in Arabic, English, French or German, with preview and automatic numbering (INV-000001).",
+ f3h="Countries and currencies (Pro)", f3p="Supports many Arab and international countries, with their currencies, electricity prices and exchange rates. Free uses the default currency; advanced currency settings are in Pro.",
+ f4h="Customer and invoice details (Pro)", f4p="Customer and delivery info, line items, discount, shipping, tax and notes, with multi-page tables.",
  f5h="Remembers your setup", f5p="Language, theme, printer, material and results are saved automatically.",
  f6h="Fast and compact", f6p="Smooth scrolling and a compact layout that fits small screens.",
  amt="Amount", invL="Invoice language",
@@ -145,20 +149,22 @@ T = {
  k1="Customer", k2="Delivery", k3="Line items", k4="Discount", k5="Shipping", k6="Tax", k7="Notes", k8="Multi-page tables",
  s1="Language", s2="Theme", s3="Printer", s4="Material", s5="Latest results",
  fit="Window width",
- gH="Download and unlock",
- g1h="Free download", g1p="Install the full app and try it. Every feature is there, locked until you activate.",
- g1a="Windows installer, ready in a minute", g1b="Every feature included, nothing removed", g1c="Unlock any time with an Activation Code", g1d="Always the latest version",
- g2h="Full License", g2p="One payment. Pay with PayPal or a debit/credit card.",
- g2a="One-time payment, no subscription", g2b="Secure checkout through PayPal", g2c="Activation Code sent to you after payment",
+ gH="Free forever. Pro when you need more.",
+ g1h="Free — forever", g1p="Download the app and use it as long as you like. No trial, no expiry, no code needed.",
+ g1a="Real cost, profit and selling price", g1b="Material, electricity, maintenance, failure risk and margin", g1c="Printer selection, G-code and 3MF analysis", g1d="Single-material workflow, always the latest version",
+ g2h="Pro License", g2p="One payment unlocks the business tools. Pay with PayPal or a debit/credit card.",
+ g2a="One-time payment, no subscription", g2b="PDF invoices, multi-material and multi-color pricing", g2c="Platform, payment, shipping, packaging and labor costs, plus advanced currencies", g2d="Secure PayPal checkout. Activation Code sent after payment",
  tPP="PayPal / Card", tCR="Crypto (USDT)", cNet="Network", cAmt="Amount", cQr="Scan with Trust Wallet to pay directly", cAddr="Wallet address",
  cTrust="Pay with Trust Wallet", cCopy="Copy address", cOk="Copied ✅", cMail="Email payment screenshot",
  cWarn="Send only USDT on the TRON (TRC20) network. Other networks or coins are lost. After paying, take a screenshot of the payment (showing the TXID) and email it to us with your Device ID.",
- stH="How activation works",
- steps=["Download and install the program.","Open it and copy your Device ID.","Buy the Full License.","Send us your Device ID (and a payment screenshot if you paid with crypto).","Enter the Activation Code we send you. All features unlock."],
+ stH="Free needs no code. To upgrade to Pro:",
+ steps=["Download and install the program. Free works right away, no code.","To upgrade, open it and copy your Device ID.","Buy the Pro License.","Send us your Device ID (and a payment screenshot if you paid with crypto).","Enter the Activation Code we send you. Pro features unlock."],
  qH="Frequently asked questions",
- faq=[("Is the free version limited?","It is the same full program. Features stay locked until you enter an Activation Code."),
-      ("What is a Device ID?","A code the program shows on the activation screen. We use it to create an Activation Code for your device."),
-      ("How do I get my Activation Code?","After payment, send your Device ID to us. We reply with your Activation Code by hand."),
+ faq=[("Is the free version a trial?","No. Free is permanent: no trial period and no expiry. You can calculate core print costs, edit material, failure, electricity, maintenance and margin, choose your printer, and analyze G-code and 3MF files."),
+      ("What is locked in Free?","PDF invoices, multi-material and multi-color printing, extra business costs (platform fee, payment fee, shipping, packaging, labor), and advanced currency and country settings. These unlock with Pro."),
+      ("What does Pro add?","PDF invoices, multi-material and multi-color pricing, the business-cost fields above, and advanced currency settings with exchange rates. Pro is a one-time payment, no subscription."),
+      ("What is a Device ID?","A code the program shows on the activation screen. You only need it for Pro. We use it to create an Activation Code for your device."),
+      ("How do I get my Activation Code?","After payment, send your Device ID to us and we reply with your Activation Code. Enter it in the program to unlock Pro."),
       ("How can I pay?","PayPal or a debit/credit card through the PayPal checkout, or USDT on the TRON (TRC20) network. Apple Pay appears where your region and browser support it."),
       ("Which system does it run on?","Windows. Download the installer (Setup.exe) and run it."),
       ("Will I get new versions?","Yes. The Download button always gives the latest release.")],
@@ -172,27 +178,27 @@ T = {
 "ar": dict(
  lang="ar", dir="rtl", home="/ar/", alt="en", altlabel="English", altlink="../index.html", locale="ar_AR",
  title="حاسبة الطباعة ثلاثية الأبعاد | التكلفة الحقيقية والربح وسعر البيع لكل طبعة",
- desc="برنامج ويندوز يحسب التكلفة الحقيقية وصافي الربح وسعر البيع لكل طبعة ثلاثية الأبعاد، شاملًا الخامة والكهرباء والصيانة واحتمال الفشل، وينشئ فواتير PDF. التحميل مجاني.",
+ desc="برنامج ويندوز يحسب التكلفة الحقيقية وصافي الربح وسعر البيع لكل طبعة ثلاثية الأبعاد، شاملًا الخامة والكهرباء والصيانة واحتمال الفشل. يحلّل ملفات G-code و3MF و STL. مجاني دائمًا، مع ترخيص Pro اختياري لفواتير PDF والتسعير متعدد المواد وتكاليف الأعمال.",
  ogt="حاسبة الطباعة ثلاثية الأبعاد | اعرف التكلفة الحقيقية لكل طبعة",
- ogd="التكلفة الحقيقية والربح وسعر البيع لكل طبعة ثلاثية الأبعاد، مع فواتير PDF. تحميل مجاني لويندوز ويُفتح برمز التفعيل.",
+ ogd="التكلفة الحقيقية والربح وسعر البيع لكل طبعة ثلاثية الأبعاد. مجاني دائمًا لويندوز. ترخيص Pro يفتح فواتير PDF والتسعير متعدد المواد وتكاليف الأعمال.",
  skip="تخطَّ إلى المحتوى", logoalt="شعار 3D Print Calculator",
  themeLbl="الوضع الداكن / الفاتح", nTry="جرّب الآن", nApp="داخل البرنامج", nFeat="المميزات", nGet="الأسعار", nFaq="الأسئلة الشائعة", nDl="تحميل",
  h1a="اعرف التكلفة الحقيقية", h1b="لكل طبعة.",
  sub="أدخل الخامة والوزن ووقت الطباعة. يضيف البرنامج الكهرباء والصيانة واحتمال الفشل، ثم يعرض لك التكلفة الحقيقية وربحك والسعر الذي تطلبه من الزبون.",
- dl="تحميل أحدث إصدار", buy="شراء النسخة الكاملة — $39.99",
- meta="ويندوز · التحميل مجاني ويُفتح برمز التفعيل",
+ dl="تحميل أحدث إصدار", buy="شراء ترخيص Pro — $39.99",
+ meta="ويندوز · مجاني دائمًا، وPro اختياري",
  labT="جرّب بأرقامك أنت", reset="إعادة ضبط", sMat="الخامة", sW="وزن المجسم", sH="وقت الطباعة", sM="هامش الربح",
  more="إعدادات إضافية", fPr="سعر الخامة ($/كغ)", fPw="استهلاك الطابعة", fKw="الكهرباء ($/ك.و.س)", fMt="الصيانة ($/ساعة)", fFl="احتمال الفشل (%)",
  cProfit="ربح +40%", tFil="تكلفة الفيلمنت", tCost="إجمالي التكلفة الحقيقية", tProfit="صافي الربح المتوقع", tPrice="سعر البيع المقترح",
  bMat="الخامة", bEle="الكهرباء", bMnt="الصيانة", bFail="حماية ضد الفشل",
  printed="المطبوع حتى الآن", sceneAlt="رسم متحرك لمزهرية تُطبع طبقة فوق طبقة بينما تزداد التكلفة المتراكمة",
- note="نسخة تجريبية: تحسب تكلفة الفيلمنت فقط. الكهرباء والصيانة والفشل والربح والفواتير في النسخة الكاملة.",
+ note="عرض سريع: يحسب تكلفة الفيلمنت فقط. النسخة المجانية من البرنامج تضيف الكهرباء والصيانة واحتمال الفشل والربح. وPro يضيف فواتير PDF وتكاليف الأعمال.",
  unitH="ساعة",
  aH="طلبيتك كاملة في نافذة واحدة",
  aP="املأ بيانات الطلب من جهة، واقرأ التكلفة والربح وسعر البيع من الأعلى.",
  x0="النافذة كاملة", x0d="كل ما يخص الطلب الواحد على شاشة واحدة.",
  x1="معطيات الطباعة", x1d="الخامة والوزن والوقت والفشل والكهرباء والهامش.",
- x2="أكثر من لون", x2d="حساب كل لون أو خامة على حدة.",
+ x2="أكثر من لون (Pro)", x2d="حساب كل لون أو خامة على حدة.",
  x3="تحليل الملف", x3d="اسحب G-code أو 3MF أو STL، والتحليل محلي.",
  x4="مراقبة المجلد", x4d="قراءة ملفات الطباعة الجديدة تلقائيًا من مجلد.",
  x5="التكلفة والربح والسعر", x5d="التكلفة الحقيقية وصافي الربح وسعر البيع المقترح.",
@@ -201,9 +207,9 @@ T = {
  cxExL="مثال: بيع بـ 10 $", cxNote="اختر بلدًا فتتغيّر العملة وسعر الكهرباء وسعر الصرف معه. القيم للتوضيح فقط.", xOpen="فتح بالحجم الكامل", xAlt="واجهة برنامج حاسبة تكلفة الطباعة بالعربية: معطيات الطلبية وبطاقات التكلفة والربح وسعر البيع وتوزيع التكلفة وحالة الطابعة المباشرة",
  fH="على ماذا تحصل",
  f1h="التكلفة والربح", f1p="الخامة والكهرباء والصيانة واحتمال الفشل في نتيجة واحدة. اسحب ملف G-code أو 3MF أو STL ويُقرأ الوزن والوقت تلقائيًا.",
- f2h="فواتير PDF", f2p="أنشئ فواتير بالعربية والإنجليزية والفرنسية والألمانية، مع معاينة وترقيم تلقائي (INV-000001).",
- f3h="دول وعملات", f3p="يدعم أكثر من بلد عربي وأجنبي، مع عملاتهم وأسعار الكهرباء والصرف.",
- f4h="بيانات الزبون والفاتورة", f4p="بيانات الزبون والتوصيل وبنود الفاتورة والخصم والشحن والضريبة والملاحظات، مع جدول متعدد الصفحات.",
+ f2h="فواتير PDF (Pro)", f2p="أنشئ فواتير بالعربية والإنجليزية والفرنسية والألمانية، مع معاينة وترقيم تلقائي (INV-000001).",
+ f3h="دول وعملات (Pro)", f3p="يدعم أكثر من بلد عربي وأجنبي، مع عملاتهم وأسعار الكهرباء والصرف. النسخة المجانية تعمل بالعملة الافتراضية، وإعدادات العملات المتقدمة في Pro.",
+ f4h="بيانات الزبون والفاتورة (Pro)", f4p="بيانات الزبون والتوصيل وبنود الفاتورة والخصم والشحن والضريبة والملاحظات، مع جدول متعدد الصفحات.",
  f5h="يتذكر إعداداتك", f5p="اللغة والثيم والطابعة والخامة والنتائج تُحفظ تلقائيًا.",
  f6h="سريع ومضغوط", f6p="تمرير سلس وواجهة مضغوطة تناسب الشاشات الصغيرة.",
  amt="المبلغ", invL="لغة الفاتورة",
@@ -211,20 +217,22 @@ T = {
  k1="الزبون", k2="التوصيل", k3="بنود الفاتورة", k4="الخصم", k5="الشحن", k6="الضريبة", k7="الملاحظات", k8="جداول متعددة الصفحات",
  s1="اللغة", s2="الثيم", s3="الطابعة", s4="الخامة", s5="آخر النتائج",
  fit="عرض النافذة",
- gH="حمّل ثم افتح القفل",
- g1h="تحميل مجاني", g1p="ثبّت البرنامج الكامل وجرّبه. كل الميزات موجودة ومقفلة حتى تفعّل.",
- g1a="ملف تثبيت لويندوز، جاهز خلال دقيقة", g1b="كل الميزات موجودة، ولا شيء محذوف", g1c="افتح القفل في أي وقت برمز التفعيل", g1d="دائمًا آخر إصدار",
- g2h="النسخة الكاملة", g2p="دفعة واحدة. ادفع عبر PayPal أو بطاقة خصم/ائتمان.",
- g2a="دفعة واحدة، بدون اشتراك", g2b="دفع آمن عبر PayPal", g2c="يصلك رمز التفعيل بعد الدفع",
+ gH="مجاني دائمًا. وPro عندما تحتاج أكثر.",
+ g1h="مجاني — للأبد", g1p="حمّل البرنامج واستخدمه بدون حدّ زمني. لا تجربة مؤقتة ولا انتهاء ولا حاجة لرمز.",
+ g1a="التكلفة الحقيقية والربح وسعر البيع", g1b="الخامة والكهرباء والصيانة واحتمال الفشل وهامش الربح", g1c="اختيار الطابعة وتحليل ملفات G-code و3MF", g1d="سير عمل بمادة واحدة، ودائمًا آخر إصدار",
+ g2h="ترخيص Pro", g2p="دفعة واحدة تفتح أدوات الأعمال. ادفع عبر PayPal أو بطاقة خصم/ائتمان.",
+ g2a="دفعة واحدة، بدون اشتراك", g2b="فواتير PDF وتسعير متعدد المواد والألوان", g2c="رسوم المنصة والدفع والشحن والتغليف والعمالة، وإعدادات العملات المتقدمة", g2d="دفع آمن عبر PayPal. يصلك رمز التفعيل بعد الدفع",
  tPP="PayPal / بطاقة", tCR="كريبتو (USDT)", cNet="الشبكة", cAmt="المبلغ", cQr="امسح الكود بتطبيق Trust Wallet وادفع مباشرة", cAddr="عنوان المحفظة",
  cTrust="ادفع بمحفظة Trust Wallet", cCopy="نسخ العنوان", cOk="تم النسخ ✅", cMail="إرسال سكرين شوت الدفع بالبريد",
  cWarn="أرسل USDT فقط على شبكة TRON (TRC20). أي شبكة أو عملة أخرى تضيع. بعد الدفع صوّر شاشة عملية الدفع (يظهر فيها رقم المعاملة TXID) وأرسلها لنا على البريد مع Device ID.",
- stH="كيف يعمل التفعيل",
- steps=["حمّل البرنامج وثبّته.","افتحه وانسخ Device ID.","اشترِ النسخة الكاملة.","أرسل لنا Device ID (ولقطة شاشة الدفع إذا دفعت بالكريبتو).","أدخل رمز التفعيل الذي نرسله لك. تُفتح كل الميزات."],
+ stH="النسخة المجانية لا تحتاج رمزًا. للترقية إلى Pro:",
+ steps=["حمّل البرنامج وثبّته. النسخة المجانية تعمل فورًا بدون رمز.","للترقية، افتحه وانسخ Device ID.","اشترِ ترخيص Pro.","أرسل لنا Device ID (ولقطة شاشة الدفع إذا دفعت بالكريبتو).","أدخل رمز التفعيل الذي نرسله لك. تُفتح ميزات Pro."],
  qH="الأسئلة الشائعة",
- faq=[("هل النسخة المجانية محدودة؟","هي نفس البرنامج الكامل. الميزات تبقى مقفلة حتى تدخل رمز التفعيل."),
-      ("ما هو Device ID؟","رمز يظهره البرنامج في شاشة التفعيل. نستخدمه لإنشاء رمز تفعيل لجهازك."),
-      ("كيف أحصل على رمز التفعيل؟","بعد الدفع أرسل لنا Device ID، ونرد عليك برمز التفعيل يدويًا."),
+ faq=[("هل النسخة المجانية مجرد تجربة؟","لا. النسخة المجانية دائمة: بدون مدة تجريبية وبدون انتهاء. تحسب تكلفة الطباعة الأساسية، وتعدّل الخامة والفشل والكهرباء والصيانة والهامش، وتختار طابعتك، وتحلّل ملفات G-code و3MF."),
+      ("ما المقفل في النسخة المجانية؟","فواتير PDF، والطباعة متعددة المواد والألوان، وتكاليف الأعمال الإضافية (رسوم المنصة ورسوم الدفع والشحن والتغليف والعمالة)، وإعدادات العملات والدول المتقدمة. تُفتح كلها بترخيص Pro."),
+      ("ماذا يضيف Pro؟","فواتير PDF، وتسعير متعدد المواد والألوان، وحقول تكاليف الأعمال المذكورة، وإعدادات العملات المتقدمة مع أسعار الصرف. Pro دفعة واحدة بدون اشتراك."),
+      ("ما هو Device ID؟","رمز يظهره البرنامج في شاشة التفعيل. تحتاجه فقط لـ Pro. نستخدمه لإنشاء رمز تفعيل لجهازك."),
+      ("كيف أحصل على رمز التفعيل؟","بعد الدفع أرسل لنا Device ID، ونرد عليك برمز التفعيل. أدخله في البرنامج لتفتح Pro."),
       ("كيف أدفع؟","عبر PayPal أو بطاقة خصم/ائتمان من صفحة الدفع، أو بعملة USDT على شبكة TRON (TRC20). يظهر Apple Pay حيث تدعمه منطقتك ومتصفحك."),
       ("على أي نظام يعمل؟","ويندوز. حمّل ملف التثبيت (Setup.exe) وشغّله."),
       ("هل أحصل على الإصدارات الجديدة؟","نعم. زر التحميل يعطيك دائمًا آخر إصدار.")],
@@ -236,6 +244,13 @@ T = {
  inv=dict(inv="فاتورة", item="البند", qty="الكمية", amt="المبلغ", sub="المجموع الفرعي", ship="الشحن", total="الإجمالي"),
 ),
 }
+PROMO = dict(
+ en=dict(bar="Halloween sale: 50% off Pro", ends="Ends in", pnote="Halloween offer, 50% off until Oct 31", off="-50%", u="d|h|m|s"),
+ ar=dict(bar="عرض الهالوين: خصم 50% على Pro", ends="ينتهي بعد", pnote="عرض الهالوين: خصم 50% حتى 31 تشرين الأول", off="-50%", u="يوم|س|د|ث"),
+)
+for _l in ("en", "ar"):
+    T[_l]["buyReg"] = T[_l]["buy"]
+    T[_l]["buy"] = T[_l]["buy"].replace("$39.99", "$19.99")
 INV = {
  "en": T["en"]["inv"], "ar": T["ar"]["inv"],
  "fr": dict(inv="Facture", item="Article", qty="Qté", amt="Montant", sub="Sous-total", ship="Livraison", total="Total"),
@@ -246,6 +261,38 @@ HOT = {
  "en": [(0,0,0,0),(2.1,5.1,46.0,52.8),(2.1,58.8,46.0,8.1),(2.1,71.2,46.0,15.9),(2.1,87.9,46.0,6.9),(50.2,4.6,47.7,11.3),(50.1,16.7,47.9,79.3)],
  "ar": [(0,0,0,0),(51.0,5.1,46.1,52.6),(51.0,58.3,46.1,7.9),(51.0,71.2,46.1,15.7),(51.0,87.6,46.1,7.0),(1.25,4.5,47.7,11.2),(1.0,16.6,48.1,79.5)],
 }
+CMP = [  # (English, Arabic, Free, Pro)  1 = yes, 0 = no, text = shown as is
+ ("No expiry, no trial period", "بدون انتهاء وبدون مدة تجريبية", 1, 1),
+ ("Core cost and selling price", "حساب التكلفة وسعر البيع الأساسي", 1, 1),
+ ("Edit material, failure risk, electricity, maintenance and margin", "تعديل الخامة والفشل والكهرباء والصيانة والهامش", 1, 1),
+ ("Pricing method (net margin or markup)", "طريقة التسعير (هامش صافٍ أو نسبة فوق التكلفة)", 1, 1),
+ ("Printer selection", "اختيار الطابعة", 1, 1),
+ ("G-code and 3MF analysis (STL estimate)", "تحليل ملفات G-code و3MF (وتقدير STL)", 1, 1),
+ ("Automatic folder watch", "مراقبة مجلد تلقائيًا", 1, 1),
+ ("Recent operations log", "سجل العمليات الأخيرة", 1, 1),
+ ("Electricity tier 2", "شريحة الكهرباء 2", 0, 1),
+ ("PDF invoices", "فواتير PDF", 0, 1),
+ ("Multi-material and multi-color printing", "الطباعة متعددة المواد والألوان", 0, 1),
+ ("Platform fee", "رسوم المنصة", 0, 1),
+ ("Payment fee", "رسوم الدفع", 0, 1),
+ ("Shipping", "الشحن", 0, 1),
+ ("Packaging", "التغليف", 0, 1),
+ ("Labor", "العمل اليدوي", 0, 1),
+ ("Exchange rate and advanced currency settings", "سعر الدولار وإعدادات العملات المتقدمة", 0, 1),
+ ("Country selection", "اختيار الدولة", ("Syria only", "سوريا فقط"), 1),
+ ("Needs an Activation Code", "يحتاج رمز تفعيل", 0, 1),
+]
+CMPT = dict(en=dict(h="Free vs Pro, feature by feature", f="Feature", a="Free", b="Pro", y="Included", n="Not included"),
+            ar=dict(h="الفرق بين Free وPro، ميزة بميزة", f="الميزة", a="Free", b="Pro", y="موجود", n="غير موجود"))
+def cmp_html(t):
+    L = t["lang"]; c = CMPT[L]; i = 0 if L == "en" else 1
+    def cell(v):
+        if isinstance(v, tuple): return '<td class="cm-t">%s</td>' % v[i]
+        return '<td class="cm-y" aria-label="%s">✅</td>' % c["y"] if v else '<td class="cm-n" aria-label="%s">❌</td>' % c["n"]
+    rows = "".join('<tr><th scope="row">%s</th>%s%s</tr>\n' % (r[i], cell(r[2]), cell(r[3])) for r in CMP)
+    return ('<section class="sec" id="compare"><div class="wrap">\n  <div class="sec-head"><h2>%s</h2></div>\n'
+            '  <div class="cm-wrap"><table class="cm">\n  <thead><tr><th scope="col">%s</th><th scope="col">%s</th><th scope="col">%s</th></tr></thead>\n  <tbody>\n%s  </tbody></table></div>\n</div></section>\n\n'
+            % (c["h"], c["f"], c["a"], c["b"], rows))
 e = html.escape
 
 def head(t, path):
@@ -259,12 +306,13 @@ def head(t, path):
               "downloadUrl": DL, "image": SITE + "/og.png", "inLanguage": ["en", "ar"],
               "featureList": ["Real cost, net profit and selling price per print", "Material, electricity, maintenance and failure-risk breakdown",
                               "PDF invoices in Arabic, English, French and German"],
-              "offers": {"@type": "Offer", "price": "39.99", "priceCurrency": "USD", "availability": "https://schema.org/InStock", "url": url + "#get"}}
+              "offers": [{"@type": "Offer", "name": "Free", "price": "0", "priceCurrency": "USD", "availability": "https://schema.org/InStock", "url": DL},
+                         {"@type": "Offer", "name": "Pro", "price": "39.99", "priceCurrency": "USD", "availability": "https://schema.org/InStock", "url": url + "#get"}]}
     redirect = ""
     if L == "en":
         redirect = '<script>try{var l=localStorage.getItem("lang");if(l==="ar"||(!l&&/^ar/i.test(navigator.language||"")))location.replace("ar/index.html")}catch(e){}</script>\n'
     return f'''<!DOCTYPE html>
-<html lang="{L}" dir="{t["dir"]}">
+<html lang="{L}" dir="{t["dir"]}" class="hw">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -294,7 +342,7 @@ def head(t, path):
 <link rel="icon" type="image/png" href="{P}favicon.png">
 <link rel="preload" href="{P}fonts/poppins-bold.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="{P}fonts/{"ibm-plex-sans-arabic-arabic-600-normal.woff2" if L=="ar" else "poppins-regular.woff"}" as="font" type="font/{"woff2" if L=="ar" else "woff"}" crossorigin>
-<script>document.documentElement.className+=" js"</script>
+<script>document.documentElement.className+=" js";if(Date.now()>new Date("{PROMO_END}").getTime())document.documentElement.classList.remove("hw")</script>
 {redirect}<link rel="stylesheet" href="{P}site.css">
 <script type="application/ld+json">{json.dumps(app_ld, ensure_ascii=False)}</script>
 <script type="application/ld+json">{json.dumps(faq_ld, ensure_ascii=False)}</script>
@@ -307,7 +355,19 @@ def page(L):
     A = o.append
     A(f'''<body>
 <a class="skip" href="#main">{t["skip"]}</a>
-<header class="top"><div class="wrap bar">
+<div class="promo" id="promo" data-promo-only data-end="{PROMO_END}" data-u="{PROMO[L]["u"]}"><span class="pb"><i class="pk"></i>{PROMO[L]["bar"]}</span><span class="pe">{PROMO[L]["ends"]}</span><span class="cd" dir="ltr" data-cd></span><a class="pl" href="#buy">{t["buy"].split(" — ")[0]} →</a></div>
+<div class="hwdeco" aria-hidden="true"><svg width="0" height="0" style="position:absolute"><defs>
+<symbol id="bat" viewBox="0 0 64 28"><path d="M32 9 L29 3 L27 10 L20 7 L10 8 L0 15 L7 14 L12 18 L18 15 L24 19 L29 17 L32 23 L35 17 L40 19 L46 15 L52 18 L57 14 L64 15 L54 8 L44 7 L37 10 L35 3 L32 9Z" fill="currentColor"/></symbol>
+<symbol id="pk" viewBox="0 0 120 100"><defs><radialGradient id="pkg" cx=".5" cy=".4" r=".7"><stop offset="0" stop-color="#ffb347"/><stop offset=".6" stop-color="#ff7a00"/><stop offset="1" stop-color="#c24a00"/></radialGradient></defs>
+<path d="M56 20c-1-9 2-14 9-16 0 6-2 11-5 16z" fill="#4c7a1f"/><path d="M54 22c0-6 3-9 8-10l2 4c-3 1-5 3-5 7z" fill="#3b5f17"/>
+<ellipse cx="34" cy="58" rx="27" ry="36" fill="url(#pkg)"/><ellipse cx="86" cy="58" rx="27" ry="36" fill="url(#pkg)"/><ellipse cx="60" cy="56" rx="30" ry="39" fill="url(#pkg)"/>
+<path d="M40 24c-9 14-9 52 0 66M80 24c9 14 9 52 0 66M60 17v78" stroke="#b83f00" stroke-width="1.6" fill="none" opacity=".5"/>
+<path d="M33 52l10-18 10 18z M67 52l10-18 10 18z M54 62l6-10 6 10z" fill="#ffe27a"/>
+<path d="M30 68l9 12 8-9 7 10 6-10 7 10 8-9 9 12c-8 10-20 14-27 14s-19-4-27-14z" fill="#ffe27a"/></symbol>
+<symbol id="gh" viewBox="0 0 80 100"><path d="M8 96V42C8 18 22 4 40 4s32 14 32 38v54l-11-10-10 10-11-10-10 10-10-10z" fill="#f4eeff"/><ellipse cx="29" cy="40" rx="5" ry="8" fill="#2a1550"/><ellipse cx="51" cy="40" rx="5" ry="8" fill="#2a1550"/><ellipse cx="40" cy="62" rx="7" ry="10" fill="#2a1550"/></symbol>
+<symbol id="sp" viewBox="0 0 48 40"><g stroke="#cbb6ff" stroke-width="2" fill="none" stroke-linecap="round"><path d="M18 20L5 10 2 18M18 22L4 24 3 33M19 25L9 36M30 20L43 10 46 18M30 22L44 24 45 33M29 25L39 36"/></g><circle cx="24" cy="26" r="9" fill="#150826" stroke="#cbb6ff" stroke-width="1.2"/><circle cx="24" cy="15" r="6" fill="#150826" stroke="#cbb6ff" stroke-width="1.2"/><circle cx="22" cy="14" r="1.6" fill="#ff5a3c"/><circle cx="26" cy="14" r="1.6" fill="#ff5a3c"/></symbol>
+</defs></svg><span class="web wl"></span><span class="web wr"></span><svg class="fl g1" viewBox="0 0 80 100"><use href="#gh"/></svg><svg class="fl g2" viewBox="0 0 80 100"><use href="#gh"/></svg><svg class="fl p1 jl" viewBox="0 0 120 100"><use href="#pk"/></svg><svg class="fl p2 jl" viewBox="0 0 120 100"><use href="#pk"/></svg></div>
+<header class="top"><span class="spider hs" aria-hidden="true"><i></i><svg width="40" height="34"><use href="#sp"/></svg></span><div class="wrap bar">
   <a class="logo" href="index.html"><img src="{P}logo.png" width="38" height="38" alt="{e(t["logoalt"])}">3D Print Calculator</a>
   <nav aria-label="Main">
     <a class="nl" href="#try">{t["nTry"]}</a>
@@ -322,13 +382,14 @@ def page(L):
 </div></header>
 
 <main id="main">
-<section class="hero" id="top"><div class="wrap hero-grid">
+<section class="hero" id="top"><div class="hw-moon" aria-hidden="true"><svg class="mb m1" viewBox="0 0 64 28"><use href="#bat"/></svg><svg class="mb m2" viewBox="0 0 64 28"><use href="#bat"/></svg><svg class="mb m3" viewBox="0 0 64 28"><use href="#bat"/></svg></div>
+<div class="wrap hero-grid">
   <div class="hero-copy">
     <h1><span class="a">{t["h1a"]}</span><span>{t["h1b"]}</span></h1>
     <p class="hero-sub">{t["sub"]}</p>
     <div class="cta">
       <a class="btn" href="{DL}" rel="noopener">{t["dl"]}</a>
-      <a class="btn ghost" href="#buy">{t["buy"]}</a>
+      <a class="btn ghost" href="#buy" data-reg-text="{t["buyReg"]}">{t["buy"]}</a>
     </div>
     <p class="meta"><span id="ver"></span>{t["meta"]}</p>
   </div>
@@ -461,25 +522,26 @@ def page(L):
     </div>
     <div class="panel buy" id="buy">
       <h3>{t["g2h"]}</h3>
-      <div class="price">$39.99</div>
+      <div class="price"><s class="old" data-promo-only>$39.99</s> <span data-reg-text="$39.99">$19.99</span> <em class="off" data-promo-only>{PROMO[L]["off"]}</em></div>
+      <p class="promo-row" data-promo-only><i class="pk"></i>{PROMO[L]["pnote"]} · {PROMO[L]["ends"]} <span class="cd" dir="ltr" data-cd></span></p>
       <div class="pay-tabs" role="tablist">
         <button type="button" role="tab" id="tabPP" aria-selected="true" aria-controls="viewPP">{t["tPP"]}</button>
         <button type="button" role="tab" id="tabCR" aria-selected="false" aria-controls="viewCR">{t["tCR"]}</button>
       </div>
       <div class="pay-view" id="viewPP" role="tabpanel" aria-labelledby="tabPP">
         <p>{t["g2p"]}</p>
-        <ul class="ticks"><li>{t["g2a"]}</li><li>{t["g2b"]}</li><li>{t["g2c"]}</li></ul>
-        <a class="btn" href="{PAYPAL}" target="_blank" rel="noopener">{t["buy"]}</a>
+        <ul class="ticks"><li>{t["g2a"]}</li><li>{t["g2b"]}</li><li>{t["g2c"]}</li><li>{t["g2d"]}</li></ul>
+        <a class="btn" href="{PAYPAL}" data-reg-href="{PAYPAL_REG}" data-reg-text="{t["buyReg"]}" target="_blank" rel="noopener">{t["buy"]}</a>
       </div>
       <div class="pay-view" id="viewCR" role="tabpanel" aria-labelledby="tabCR" hidden>
         <div class="crypto-box">
           <div class="crypto-info"><p class="k">{t["cNet"]}</p><p class="v net" dir="ltr">USDT · TRON (TRC20)</p></div>
-          <div class="crypto-info"><p class="k">{t["cAmt"]}</p><p class="v" dir="ltr">39.99 USDT</p></div>
+          <div class="crypto-info"><p class="k">{t["cAmt"]}</p><p class="v" dir="ltr"><span data-reg-text="39.99">19.99</span> USDT</p></div>
         </div>
         <div class="qr-wrap"><div class="qr">{QR}</div><p class="qr-cap">{t["cQr"]}</p></div>
         <p class="addr-k">{t["cAddr"]}</p>
         <code class="addr" id="addr">{ADDR}</code>
-        <a class="btn" id="trustPay" href="{TRUST}" target="_blank" rel="noopener">{t["cTrust"]}</a>
+        <a class="btn" id="trustPay" href="{TRUST}" data-reg-href="{TRUST_REG}" target="_blank" rel="noopener">{t["cTrust"]}</a>
         <button class="btn ghost" type="button" id="copyBtn">{t["cCopy"]}</button>
         <a class="btn ghost" id="mailProof" href="mailto:{MAIL}?subject=Payment%20proof%20-%203D%20Print%20Calculator&amp;body=Device%20ID%3A%20%0A%0A(Attach%20your%20payment%20screenshot%20to%20this%20email)">{t["cMail"]}</a>
         <p class="warn">{t["cWarn"]}</p>
@@ -488,7 +550,7 @@ def page(L):
   </div>
 </div></section>
 
-<section class="sec" id="how"><div class="wrap">
+{cmp_html(t)}<section class="sec alt" id="how"><div class="wrap">
   <div class="sec-head"><h2>{t["stH"]}</h2></div>
   <ol class="steps">
 ''')
@@ -497,7 +559,7 @@ def page(L):
     A(f'''  </ol>
 </div></section>
 
-<section class="sec alt" id="faq"><div class="wrap">
+<section class="sec" id="faq"><div class="wrap">
   <div class="sec-head"><h2>{t["qH"]}</h2></div>
   <div class="faq">
 ''')
@@ -507,6 +569,7 @@ def page(L):
 </div></section>
 </main>
 
+<div class="hw-yard" aria-hidden="true"><svg class="yard" viewBox="0 0 1600 200" preserveAspectRatio="xMidYMax slice"><defs><linearGradient id="yf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgba(160,100,255,0)"/><stop offset="1" stop-color="rgba(160,100,255,.45)"/></linearGradient></defs><rect width="1600" height="200" fill="url(#yf)"/><g stroke="#05020a" stroke-linecap="round" fill="none"><path d="M150 200C152 150 146 120 150 70" stroke-width="16"/><path d="M148 110C120 95 100 80 80 50M150 90C175 75 195 62 215 30M149 70C140 50 138 32 128 12M150 80C165 55 170 42 182 18M120 92C100 90 85 98 66 92M176 78C195 80 210 74 228 80" stroke-width="6"/></g><path d="M0 200V150Q150 138 320 152T700 148 1000 152 1300 146 1600 150V200Z" fill="#06030c"/><path d="M300 168V141.0a23.0 23.0 0 0 1 46 0V168z" fill="#0b0516" stroke="rgba(190,160,255,.35)" stroke-width="1.4"/><path d="M323.0 134.1v22.5M310.35 144.45h25.3" stroke="rgba(190,160,255,.5)" stroke-width="2"/><path d="M380 170V151.0a19.0 19.0 0 0 1 38 0V170z" fill="#0b0516" stroke="rgba(190,160,255,.35)" stroke-width="1.4"/><path d="M389.5 147.2h19.0M389.5 152.9h19.0" stroke="rgba(190,160,255,.35)" stroke-width="1.5"/><path d="M540 172V145.0a25.0 25.0 0 0 1 50 0V172z" fill="#0b0516" stroke="rgba(190,160,255,.35)" stroke-width="1.4"/><path d="M552.5 140.8h25.0M552.5 148.6h25.0" stroke="rgba(190,160,255,.35)" stroke-width="1.5"/><path d="M780 170V148.0a20.0 20.0 0 0 1 40 0V170z" fill="#0b0516" stroke="rgba(190,160,255,.35)" stroke-width="1.4"/><path d="M800.0 142.0v18.900000000000002M789.0 151.0h22.0" stroke="rgba(190,160,255,.5)" stroke-width="2"/><path d="M860 172V155.0a17.0 17.0 0 0 1 34 0V172z" fill="#0b0516" stroke="rgba(190,160,255,.35)" stroke-width="1.4"/><path d="M868.5 151.6h17.0M868.5 156.7h17.0" stroke="rgba(190,160,255,.35)" stroke-width="1.5"/><path d="M1010 172V146.0a24.0 24.0 0 0 1 48 0V172z" fill="#0b0516" stroke="rgba(190,160,255,.35)" stroke-width="1.4"/><path d="M1022.0 142.0h24.0M1022.0 149.5h24.0" stroke="rgba(190,160,255,.35)" stroke-width="1.5"/><path d="M1090 172V153.0a19.0 19.0 0 0 1 38 0V172z" fill="#0b0516" stroke="rgba(190,160,255,.35)" stroke-width="1.4"/><path d="M1109.0 147.3v17.1M1098.55 155.85h20.900000000000002" stroke="rgba(190,160,255,.5)" stroke-width="2"/><g fill="#06030c"><rect x="1250" y="96" width="190" height="76"/><path d="M1240 98L1345 40 1450 98z"/><rect x="1400" y="50" width="26" height="46"/><path d="M1396 52L1413 22 1430 52z"/><rect x="1262" y="52" width="22" height="46"/><path d="M1258 54L1273 28 1288 54z"/><rect x="1388" y="70" width="14" height="22" fill="#06030c"/></g><g fill="#ffb347" class="win"><rect x="1272" y="110" width="16" height="22"/><rect x="1310" y="110" width="16" height="22"/><rect x="1352" y="110" width="16" height="22"/><rect x="1394" y="110" width="16" height="22"/><rect x="1269" y="70" width="8" height="12"/><rect x="1410" y="68" width="8" height="12"/><rect x="1330" y="76" width="12" height="16"/></g><use href="#pk" class="jl" x="450" y="92" width="84" height="70" style="--d:0.7s"/><use href="#pk" class="jl" x="660" y="100" width="70" height="58" style="--d:0.7s"/><use href="#pk" class="jl" x="940" y="88" width="88" height="73" style="--d:0.7s"/><use href="#pk" class="jl" x="1170" y="104" width="66" height="55" style="--d:0.3s"/><use href="#pk" class="jl" x="250" y="112" width="62" height="52" style="--d:1.7s"/><use href="#pk" class="jl" x="1500" y="96" width="80" height="67" style="--d:0.7s"/></svg></div>
 <footer><div class="wrap">
   <span>© 2026 3D Print Calculator</span>
   <nav aria-label="Footer">
@@ -534,6 +597,7 @@ def page(L):
     ver=t["ver"], copy=t["cCopy"], copied=t["cOk"], mOk=t["mOk"], mBad=t["mBad"], mErr=t["mErr"], mSend=t["mSend"],
     key=WEB3, inv=INV, fit=t["fit"]), ensure_ascii=False)};</script>
 <script src="{P}site.js" defer></script>
+<script src="{P}promo.js" defer></script>
 </body>
 </html>
 ''')
